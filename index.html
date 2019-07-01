@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="store">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Store Application</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap@3.3.5" data-semver="3.3.5" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.css" rel="stylesheet" data-require="bootstrap@3.3.5" data-semver="3.3.5" />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" data-require="bootstrap@3.3.5" data-semver="3.3.5"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js" data-require="bootstrap@3.3.5" data-semver="3.3.5"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" data-require="angularjs@1.4" data-semver="1.4.4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-cookies.min.js" data-require="angularjs@1.4" data-semver="1.4.4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-sanitize.min.js" data-require="angularjs@1.4" data-semver="1.4.4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js" data-require="angularjs@1.4" data-semver="1.4.4"></script>
+    <script data-require="jquery@2.1.4" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="app.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div ng-controller="StoreController">
+        <h1>STORE</h1>
+		<div class="row">
+        <ul class="list-group text-center">
+          <li class="col-xs-6 col-md-3 col-sm-3 col-lg-3 list-group-item" ng-repeat="product in products">
+            <figure>
+              <img width="100" height="100" src="{{product.image}}" />
+              <figcaption>
+                  {{product.name}}  
+				  <h3><del style="color:gray">{{product.old_price}} tk</del></h3>
+				<h3>{{product.price}} tk</h3>
+              </figcaption>
+            </figure>
+            <input class="btn btn-success" type="button" ng-click="addItemToCart(product)" value="BUY" />
+          </li>
+        </ul>
+		</div>
+        <div class="row" ng-show="cart.length !== 0">
+          <h1>CART-SHOW</h1>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="c in cart">
+              <h4>{{c.name}} |                <span style="color:blue"> {{c.qty}} </span>
+ | {{c.price*c.qty | currency}}</h4>
+              <input class="btn btn-danger" type="button" ng-click="removeItemCart(c)" value="Remove" />
+            </li>
+          </ul>
+
+          Total : {{total | currency}}
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
